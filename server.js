@@ -16,9 +16,12 @@ const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
 
 app.use(express.json())
+app.use(express.static(path.join(__dirname, "public")))
+// app.use("/static", express.static(path.join(__dirname, "public")))
+
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join__dirname, "/public/index.html")
+    res.sendFile(path.join(__dirname, "public/index.html"))
 })
 
 app.get("/testrollbar", (req, res) => {
@@ -55,7 +58,7 @@ app.get("/aliens", (req, res) => {
 
 app.get('/api/robots', (req, res) => {
     try {
-        res.status(200).send(botsArr)
+        res.status(200).send(bots)
     } catch (error) {
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
@@ -114,7 +117,7 @@ app.get('/api/player', (req, res) => {
     }
 })
 
-const port = process.env.PORT || 5501
+const port = process.env.PORT || 3000
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
